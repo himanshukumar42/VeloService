@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -37,3 +37,7 @@ class InvoiceViewSet(viewsets.ModelViewSet):
         invoice = Invoice.objects.create(vehicle=vehicle, total_price=total_price)
         serializer = self.get_serializer(invoice)
         return Response(serializer.data)
+
+
+def health_check(request):
+    return JsonResponse({"status": "Health Check Ok"}, status=200)
