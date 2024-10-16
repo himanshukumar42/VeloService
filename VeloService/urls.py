@@ -21,5 +21,6 @@ from VeloCare.views import health_check
 urlpatterns = [
     path("", health_check, name="health-check"),
     path("admin/", admin.site.urls),
-    path("api/v1/", include("VeloCare.urls")),
+    path("api/v1/velocare/", include("VeloCare.urls")),
+    path("api/v1/user/", include("User.urls"))
 ]

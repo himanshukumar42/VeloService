@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "User",
     "rest_framework",
+    "rest_framework_simplejwt",
     "VeloCare",
 ]
 
@@ -105,6 +107,18 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+AUTH_USER_MODEL = 'User.CustomUser'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+AUTHENTICATION_BACKENDS = [
+    'User.backends.CustomUserModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
 
