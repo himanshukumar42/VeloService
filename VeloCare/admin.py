@@ -27,14 +27,14 @@ class ComponentAdmin(admin.ModelAdmin):
 
 @admin.register(Issue)
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ("vehicle", "component", "is_new")
+    list_display = ("vehicle", "component", "is_repair")
     search_fields = ("vehicle",)
-    list_filter = ("is_new",)
+    list_filter = ("is_repair",)
 
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ("vehicle", "total_price", "date")
-    search_fields = ("vehicle__license_plate",)
-    list_filter = ("date",)
-    date_hierarchy = "date"
+    list_display = ("invoice_number", "issue_date", "due_date", "total_amount", "paid")
+    search_fields = ("invoice_number",)
+    list_filter = ("issue_date", "paid")
+    date_hierarchy = "due_date"

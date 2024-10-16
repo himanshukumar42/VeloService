@@ -40,5 +40,11 @@ class CustomUser(AbstractUser):
         blank=True
     )
 
+    def is_vehicle_owner(self):
+        return self.is_user
+
+    def is_shop_owner(self):
+        return self.is_owner
+
     def __str__(self):
         return self.email
