@@ -4,11 +4,9 @@ from .views import ComponentViewSet, VehicleViewSet, IssueViewSet, InvoiceViewSe
 
 
 router = DefaultRouter()
-router.register(r'components', ComponentViewSet)
-router.register(r'vehicles', VehicleViewSet)
-router.register(r'issues', IssueViewSet)
-router.register(r'invoices', InvoiceViewSet)
+router.register(r"components", ComponentViewSet)
+router.register(r"vehicles", VehicleViewSet)
+router.register(r"issues", IssueViewSet)
+router.register(r"invoices", InvoiceViewSet)
 
-urlpatterns = [
-    path('', include(router.urls))
-]
+urlpatterns = [path("", include(router.urls))]
