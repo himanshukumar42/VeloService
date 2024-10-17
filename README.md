@@ -27,7 +27,7 @@ Develop a full-stack web application for managing vehicle services, allowing use
 1. Clone the repository:
     ```bash
     git clone https://github.com/himanshukumar42/VeloService.git
-    cd velo_service
+    cd cd VeloService
     ```
 
 2. Build and run the application using Docker Compose:
@@ -39,12 +39,19 @@ Develop a full-stack web application for managing vehicle services, allowing use
     - **Frontend**: `http://localhost:3000` (React.js)
     - **Backend API**: `http://localhost:8000` (Django)
 
+
+4. Use Frontend URL to use the application ```http://localhost:3000```
+
+5. First Sign Up a User so that there will be list of owners to add vehicle (Don't login as User (there is not update there) instead create admin account and login as admin)
+
+6. Now Sign Up as admin and then login as Admin and test the application
 # Important Information
 
 > ⚠️ **Very Important:** You will need the list of vehicle owners (in Admin Panel) to add Vehicle So to create those vehicle owner create User Account by Sign Up as User
-![Alt text](./screenshots/Admin_Sign_Up.png)
+![Alt text](./screenshots/User_Signup.png)
 > 
 **Installation Steps:**
+If you want frontend and backend separately
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
 3. Start the application with `npm start`.
