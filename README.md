@@ -38,6 +38,8 @@ Develop a full-stack web application for managing vehicle services, allowing use
 3. Once the services are up, open your browser and navigate to:
     - **Frontend**: `http://localhost:3000` (React.js)
     - **Backend API**: `http://localhost:8000` (Django)
+- Note: Please ignore Sign Up or Sign In as User as these functionality will have to be developed letter since the User 
+themselves can add Vehicles and Issues. As of now the functionality is Admin can register the Customer vehicles and Issues.
 
 4. The PostgreSQL database will be accessible on `localhost:5434`. 
 - Note: I have used 5434 PORT for PostgreSQL since my PORT 5432 was occupied by PG Admin and I wanted to expose 5434 to outside to avoid Port Conflits
