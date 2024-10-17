@@ -243,7 +243,7 @@ const Issues = () => {
           {issues.map((issue, index) => (
             <tr key={issue.id}>
               <td className="border px-4 py-2">{index + 1}</td>
-              <td className="border px-4 py-2">{issue.vehicle?.make} - {issue.vehicle?.license_plate}</td>
+              <td className="border px-4 py-2">{issue.vehicle.make} - {issue.vehicle.license_plate}</td>
               <td className="border px-4 py-2">{issue.description}</td>
               <td className="border px-4 py-2">{issue.component_name || 'N/A'}</td>
               <td className="border px-4 py-2">{issue.is_repair ? 'Yes' : 'No'}</td>

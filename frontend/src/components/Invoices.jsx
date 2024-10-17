@@ -63,21 +63,40 @@ const Invoices = () => {
     }
   };
 
-  // Add Invoice
+  // Add or Update Invoice
   const handleSubmit = async (e) => {
     e.preventDefault();
     const accessToken = localStorage.getItem('accessToken');
-    try {
-      // Add Invoice to the correct service's invoices endpoint
-      const response = await axios.post(`${API_SERVICES_URL}${newInvoice.service}/invoices/`, newInvoice, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      setInvoices([...invoices, response.data]); // Update invoices state with new invoice
-      setNewInvoice({ service: '', total_amount: '', paid: false }); // Reset form
-    } catch {
-      setError('Failed to add invoice');
+
+    if (isEditing && editInvoice) {
+      // Update existing invoice
+      try {
+        const response = await axios.put(`${API_SERVICES_URL}${newInvoice.service}/invoices/${editInvoice.id}/`, newInvoice, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        // Update invoices list with the updated invoice
+        setInvoices(invoices.map(inv => inv.id === editInvoice.id ? response.data : inv));
+        setNewInvoice({ service: '', total_amount: '', paid: false });
+        setIsEditing(false);
+        setEditInvoice(null);
+      } catch {
+        setError('Failed to update invoice');
+      }
+    } else {
+      // Add a new invoice
+      try {
+        const response = await axios.post(`${API_SERVICES_URL}${newInvoice.service}/invoices/`, newInvoice, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setInvoices([...invoices, response.data]); // Update invoices state with new invoice
+        setNewInvoice({ service: '', total_amount: '', paid: false }); // Reset form
+      } catch {
+        setError('Failed to add invoice');
+      }
     }
   };
 
@@ -100,7 +119,6 @@ const Invoices = () => {
   const markAsPaid = async (id) => {
     const accessToken = localStorage.getItem('accessToken');
     try {
-      // Use the provided API endpoint format
       await axios.post(`${API_SERVICES_URL}${newInvoice.service}/invoices/${id}/mark_as_paid/`, null, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -200,25 +218,30 @@ const Invoices = () => {
                 <td className="border px-4 py-2">{new Date(invoice.issue_date).toLocaleDateString()}</td>
                 <td className="border px-4 py-2">{invoice.due_date}</td>
                 <td className="border px-4 py-2">{invoice.total_amount}</td>
-                <td className="border px-4 py-2">{invoice.paid ? 'Yes' : 'No'}</td>
-                <td className="border px-4 py-2 flex space-x-2">
-                  <button onClick={() => startEditing(invoice)} className="text-blue-600 hover:underline">
-                    <Edit />
-                  </button>
-                  <button onClick={() => handleDeleteInvoice(invoice.id)} className="text-red-600 hover:underline">
-                    <Trash2 />
-                  </button>
-                  {!invoice.paid && (
-                    <button onClick={() => markAsPaid(invoice.id)} className="text-green-600 hover:underline">
-                      <CheckCircle />
+                <td className="border px-4 py-2">
+                  {invoice.paid ? (
+                    <CheckCircle className="text-green-500 w-5 h-5" />
+                  ) : (
+                    <button onClick={() => markAsPaid(invoice.id)} className="text-blue-500 underline">
+                      Mark as Paid
                     </button>
                   )}
+                </td>
+                <td className="border px-4 py-2 space-x-2">
+                  <button onClick={() => startEditing(invoice)} className="text-yellow-500 underline">
+                    <Edit />
+                  </button>
+                  <button onClick={() => handleDeleteInvoice(invoice.id)} className="text-red-500 underline">
+                    <Trash2 />
+                  </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5" className="border px-4 py-2 text-center">No invoices found for this service.</td>
+              <td className="border px-4 py-2 text-center" colSpan={8}>
+                No invoices available
+              </td>
             </tr>
           )}
         </tbody>
