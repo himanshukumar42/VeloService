@@ -59,14 +59,21 @@ class IssueViewSet(viewsets.ModelViewSet):
         vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
         serializer.save(vehicle=vehicle)
 
-    def update(self, request, vehicle_pk=None, pk=None):
-        issue = get_object_or_404(Issue, pk=pk, vehicle_i=vehicle_pk)
-        self.check_object_permissions(request, issue)
+    def perform_update(self, serializer):
+        try:
+            vehicle_id = self.kwargs.get('vehicle_pk')
+            issue_id = self.kwargs.get('pk')
 
-        serializer = self.get_serializer(issue, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            issue = get_object_or_404(Issue, pk=issue_id, vehicle_id=vehicle_id)
+            self.check_object_permissions(self.request, issue)
+
+            serializer = self.get_serializer(issue, data=self.request.data, partial=True)
+            serializer.is_valid(raise_exception=True,)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(str(e))
+            return Response({'error': 'An error occurred during the update.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def perform_destroy(self, instance):
         instance.delete()
@@ -114,6 +121,23 @@ class InvoiceViewSet(viewsets.ModelViewSet):
         service_id = self.kwargs.get("service_pk")
         service = get_object_or_404(Service, pk=service_id)
         serializer.save(service=service)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            print("*** reached here")
+            service_id = self.kwargs.get('service_pk')
+            invoice_id = self.kwargs.get('pk')
+
+            invoice = get_object_or_404(Invoice, pk=invoice_id, service_id=service_id)
+            self.check_object_permissions(self.request, invoice)
+
+            serializer = self.get_serializer(invoice, data=self.request.data, partial=True)
+            serializer.is_valid(raise_exception=True,)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(str(e))
+            return Response({'error': 'An error occurred during the update.'}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=['post'])
     def mark_as_paid(self, request, service_pk=None, pk=None):

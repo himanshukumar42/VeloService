@@ -38,6 +38,17 @@ Develop a full-stack web application for managing vehicle services, allowing use
 3. Once the services are up, open your browser and navigate to:
     - **Frontend**: `http://localhost:3000` (React.js)
     - **Backend API**: `http://localhost:8000` (Django)
+
+# Important Information
+
+> ⚠️ **Very Important:** You will need the list of vehicle owners (in Admin Panel) to add Vehicle So to create those vehicle owner create User Account by Sign Up as User
+![Alt text](./screenshots/Admin_Sign_Up.png)
+> 
+**Installation Steps:**
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Start the application with `npm start`.
+
 - Note: Please ignore Sign Up or Sign In as User as these functionality will have to be developed letter since the User 
 themselves can add Vehicles and Issues. As of now the functionality is Admin can register the Customer vehicles and Issues.
 
