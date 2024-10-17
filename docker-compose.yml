@@ -31,5 +31,17 @@ services:
       DB_HOST: db
       DB_PORT: 5432
 
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: npm start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+
 volumes:
   postgres_data:

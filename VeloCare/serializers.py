@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Component, Vehicle, Issue, Invoice, Service
+from User.models import CustomUser
 from User.auth.user_serializers import UserSerializer
 
 
@@ -10,21 +11,35 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 
 class VehicleSerializer(serializers.ModelSerializer):
-    owner = UserSerializer
+    owner = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    owner_email = serializers.EmailField(source='owner.email', read_only=True)
 
     class Meta:
         model = Vehicle
-        fields = "__all__"
+        fields = '__all__'
+
+    def create(self, validated_data):
+        owner = validated_data.pop("owner")
+        vehicle = Vehicle.objects.create(owner=owner, **validated_data)
+        return vehicle
 
 
 class IssueSerializer(serializers.ModelSerializer):
+    vehicle = VehicleSerializer(read_only=True)
+    component = serializers.PrimaryKeyRelatedField(queryset=Component.objects.all())
+    component_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Issue
         fields = "__all__"
 
+    def get_component_name(self, obj):
+        return obj.component.name if obj.component else None
+
 
 class ServiceSerializer(serializers.ModelSerializer):
-    issues = IssueSerializer(many=True, read_only=True)
+    vehicle = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all())
+    issues = serializers.PrimaryKeyRelatedField(queryset=Issue.objects.all(), many=True)
 
     class Meta:
         model = Service
@@ -33,16 +48,15 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         issues_data = validated_data.pop('issues', [])
-        service = Service.objects.create(**validated_data)
-        for issue_data in issues_data:
-            Issue.objects.create(service=service, **issue_data)
-        service.total_cost = self.calculate_service_cost(service)
+        service = Service(**validated_data)
+        service.total_cost = self.calculate_service_cost(service, issues_data)
         service.save()
+        service.issues.set(issues_data)
         return service
 
-    def calculate_service_cost(self, service):
+    def calculate_service_cost(self, service, issue_data):
         total_cost = 0
-        for issue in service.issues.all():
+        for issue in issue_data:
             if issue.is_repair:
                 total_cost += issue.component.repair_price
             else:
@@ -50,8 +64,16 @@ class ServiceSerializer(serializers.ModelSerializer):
 
         return total_cost
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['vehicle'] = VehicleSerializer(instance.vehicle).data
+        representation['issues'] = IssueSerializer(instance.issues.all(), many=True).data
+        return representation
+
 
 class InvoiceSerializer(serializers.ModelSerializer):
+    service = ServiceSerializer(read_only=True)
+
     class Meta:
         model = Invoice
         fields = "__all__"

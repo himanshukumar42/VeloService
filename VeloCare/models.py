@@ -5,6 +5,7 @@ from datetime import date, timedelta
 
 class Component(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(null=True)
     new_price = models.DecimalField(max_digits=10, decimal_places=2)
     repair_price = models.DecimalField(max_digits=10, decimal_places=2)
 

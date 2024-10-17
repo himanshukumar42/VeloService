@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 class IsVehicleOwner(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.uesr.is_vehicle_owner()
+        return request.user.is_authenticated and request.user.is_vehicle_owner() or request.user.is_shop_owner()
 
 
 class IsShopOwner(permissions.BasePermission):
