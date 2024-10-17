@@ -1,0 +1,652 @@
+{
+	"info": {
+		"_postman_id": "f791def6-5a0d-499f-b80f-d6f418034384",
+		"name": "VeloService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14394218"
+	},
+	"item": [
+		{
+			"name": "api/v1/user",
+			"item": [
+				{
+					"name": "/api/v1/user/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{admin_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/api/v1/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"its_alice\",\n    \"email\": \"alice@gmail.com\",\n    \"password\": \"himanshu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/v1/user/register/"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"himanshu@gmail.com\",\n    \"password\": \"himanshu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/v1/user/token/"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/owner/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"himanshu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/v1/user/owner/register/"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/owner/token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"himanshu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/v1/user/owner/token"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/token/refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTE2ODY3OSwiaWF0IjoxNzI5MDgyMjc5LCJqdGkiOiJiYjY4NzMxYTkwZmY0ODYyOWJkYzJkNjlhMDdkYjQ1MCIsInVzZXJfaWQiOjMsInVzZXJfdHlwZSI6InNob3Bfb3duZXIifQ.9GKtELJCdVlivus-MzepCT8AiHHQnWP8NRxpNXKfLZM"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTE2ODY3OSwiaWF0IjoxNzI5MDgyMjc5LCJqdGkiOiJiYjY4NzMxYTkwZmY0ODYyOWJkYzJkNjlhMDdkYjQ1MCIsInVzZXJfaWQiOjMsInVzZXJfdHlwZSI6InNob3Bfb3duZXIifQ.9GKtELJCdVlivus-MzepCT8AiHHQnWP8NRxpNXKfLZM\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/api/v1/user/token/refresh"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api/v1/velocare",
+			"item": [
+				{
+					"name": "api/v1/velocare/components",
+					"item": [
+						{
+							"name": "api/v1/velocare/components",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/components"
+							},
+							"response": []
+						},
+						{
+							"name": "api/v1/velocare/components",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Back Seat(Royal Enfield)\",\n    \"new_price\": 2000,\n    \"repair_price\": 200\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/api/v1/velocare/components/"
+							},
+							"response": []
+						},
+						{
+							"name": "api/v1/velocare/components",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Back Seat(Royal Enfield)\",\n    \"repair_price\": 450,\n    \"new_price\": 2000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/api/v1/velocare/components/2/"
+							},
+							"response": []
+						},
+						{
+							"name": "api/v1/velocare/components",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/components/2/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/v1/velocare/Vehicles",
+					"item": [
+						{
+							"name": "api/v1/velocare/vehicles/:id/issues",
+							"item": [
+								{
+									"name": "/api/v1/velocare/vehicles/:id/issues",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/vehicles/:id/issues",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"vehicles",
+												":id",
+												"issues"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/v1/velocare/vehicles/:id/issues/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"description\": \"nothing\",\n    \"component\": 5,\n    \"is_repair\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/vehicles/:id/issues/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"vehicles",
+												":id",
+												"issues",
+												""
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": "{{BASE_URL}}/api/v1/velocare/all_issues"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "/api/v1/velocare/vehicles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/vehicles/7/issues/8"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/api/v1/velocare/invoices",
+					"item": [
+						{
+							"name": "/api/v1/velocare/invoices",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/invoices"
+							},
+							"response": []
+						},
+						{
+							"name": "/api/v1/velocare/invoices",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/api/v1/velocare/invoices"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/api/v1/velocare/services",
+					"item": [
+						{
+							"name": "/api/v1/velocare/services/:service_id/",
+							"item": [
+								{
+									"name": "/api/v1/velocare/services/:service_id/invoice",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/services/:service_id/invoices",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"services",
+												":service_id",
+												"invoices"
+											],
+											"variable": [
+												{
+													"key": "service_id",
+													"value": "11"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/v1/velocare/services/:service_id/invoices/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"service\": 11\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/services/:service_id/invoices/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"services",
+												":service_id",
+												"invoices",
+												""
+											],
+											"variable": [
+												{
+													"key": "service_id",
+													"value": "11"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/v1/velocare/services/:service_id/invoices/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/services/:service_id/invoices/:id/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"services",
+												":service_id",
+												"invoices",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"key": "service_id",
+													"value": "6"
+												},
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/v1/velocare/services/:service_id/invoices/:id/mark_as_paid",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/services/:service_id/invoices/:id/mark_as_paid/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"services",
+												":service_id",
+												"invoices",
+												":id",
+												"mark_as_paid",
+												""
+											],
+											"variable": [
+												{
+													"key": "service_id",
+													"value": "6"
+												},
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/v1/velocare/services/:service_id/invoices/unpaid",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/v1/velocare/services/:service_id/invoices/unpaid",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"velocare",
+												"services",
+												":service_id",
+												"invoices",
+												"unpaid"
+											],
+											"variable": [
+												{
+													"key": "service_id",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "/api/v1/velocare/services",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/services/"
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vehicle\": 7,\n    \"issues\": [21, 22]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/api/v1/velocare/services/"
+							},
+							"response": []
+						},
+						{
+							"name": "/api/v1/velocare/services/",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{admin_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/api/v1/velocare/services/revenue_dashboard"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/v1/velocare",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/v1/velocare"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000"
+			},
+			"response": []
+		}
+	]
+}

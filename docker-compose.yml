@@ -1,0 +1,47 @@
+version: '0.1'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: velo_service_db
+      POSTGRES_USER: velo_user
+      POSTGRES_PASSWORD: velo_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DEBUG: '1'
+      DJANGO_ALLOWED_HOSTS: 'localhost 127.0.0.1 [::1]'
+      DB_NAME: velo_service_db
+      DB_USER: velo_user
+      DB_PASSWORD: velo_password
+      DB_HOST: db
+      DB_PORT: 5432
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: npm start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
